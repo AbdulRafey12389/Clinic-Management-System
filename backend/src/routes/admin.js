@@ -16,6 +16,8 @@ import {
   updateRoom,
 } from "../controllers/admin/adminRoom.js";
 
+import { getAllPatients } from "../controllers/admin/getAdminPatient.js";
+
 // MIDDLEWARES...
 import authentication from "../middlewares/authentication.js";
 import authorization from "../middlewares/authorization.js";
@@ -71,6 +73,13 @@ router.put(
   authentication,
   authorization("admin"),
   updateRoom
+);
+
+router.get(
+  "/get-patient",
+  authentication,
+  authorization("admin"),
+  getAllPatients
 );
 
 export default router;
