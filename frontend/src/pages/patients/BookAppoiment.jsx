@@ -34,7 +34,7 @@ export default function BookAppointment() {
   const [availableSlots, setAvailableSlots] = useState([]);
   const [availableRooms, setAvailableRooms] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [doctorName, setDoctorname] = useState(preselectedDoctor.name || '');
+  const [doctorName, setDoctorname] = useState(preselectedDoctor?.name || '');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -98,7 +98,6 @@ export default function BookAppointment() {
   const handleDoctorChange = (e) => {
     const doctorId = e.target.value;
     const selected = doctors.find((doc) => doc.doctorId === doctorId);
-
 
     setDoctorId(doctorId);
     setAvailableSlots(selected?.availableSlots || []);
@@ -208,7 +207,11 @@ export default function BookAppointment() {
                 disabled={!availableRooms.length}
                 className='mt-2 w-full rounded-xl p-3 bg-[#0b0f0e]/90 border border-emerald-500/10 text-gray-300 focus:outline-none'
               >
-                <option value=''>Select Room</option>
+                <option value=''>
+                  {availableRooms.length === 0
+                    ? 'Room are not available'
+                    : 'Select Room'}
+                </option>
                 {availableRooms.map((r) => (
                   <option
                     key={r._id}
